@@ -27,21 +27,19 @@
           <GenericLoader v-if="isLoading" />
           <tbody>
             <tr v-for="(branch, index) in reservationList" :key="index">
-              <td v-if="branch.name && branch.accepts_reservations">
-                <ReservationSettings  :reservationList="reservationList"
-                  :branchName="branch.name" :modalID="branch.id"
-                  :reservationDuration="JSON.parse(branch.reservation_duration)"
-                  :reservationTimes="branch.reservation_times" />
+              <td v-if="branch.accepts_reservations && branch.name">
+                <ReservationSettings :reservationList="reservationList" :branchName="branch.name" :modalID="branch.id"
+                  :reservationDuration="branch.reservation_duration" :reservationTimes="branch.reservation_times" />
               </td>
               <td v-if="branch.accepts_reservations">
                 <span v-if="branch.reference">
                   {{ branch.reference }}
                 </span>
-                <span v-if="branch.reference === null">
+                <span v-else>
                   --
                 </span>
               </td>
-              <td v-if="branch.accepts_reservations" >
+              <td v-if="branch.accepts_reservations">
                 {{ branch.accepts_reservations }}
                 <!-- {{ getTablesNumber(branch.sections)  }} -->
 

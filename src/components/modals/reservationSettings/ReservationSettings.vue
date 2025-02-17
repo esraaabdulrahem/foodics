@@ -24,133 +24,175 @@
                     <p class="modal-body__title-field">Tables </p>
                     <v-select multiple v-model="selectedTables" :options="tablesNames" />
                     <div v-if="reservationTimes != null">
-                        <div class="">
+                        <div v-if="reservationTimes.saturday.length != 0">
                             <label class="modal-body__title-field">Saturday </label>
-                            <section v-if="reservationTimes.saturday.length != 0">
-                                <b-form-timepicker :id='`saturday-${saturdayIndex}`'
-                                    v-for="(saturday, saturdayIndex) in reservationTimes.saturday" :key="saturdayIndex"
-                                    now-button reset-button :hour12="false" :value="saturday[saturdayIndex]"
-                                    placeholder="Choose a time">
+                            <b-form-timepicker :id='`saturday-${saturdayIndex}`'
+                                v-for="(saturday, saturdayIndex) in reservationTimes.saturday" :key="saturdayIndex"
+                                now-button reset-button :hour12="false" :value="saturday[saturdayIndex]"
+                                placeholder="Choose a time">
 
-                                    {{ saturday[saturdayIndex] }}
-                                </b-form-timepicker>
-                            </section>
-                            <section v-else>
-                                <b-form-timepicker id='add-saturday' now-button reset-button :hour12="false"
-                                    placeholder="Choose a time">
-                                </b-form-timepicker>
-                            </section>
+                                {{ saturday[saturdayIndex] }}
+                            </b-form-timepicker>
                         </div>
-                        <div class="">
+                        <div v-else>
+                            <label class="modal-body__title-field">Saturday </label>
+                            <b-form-timepicker id='add-saturday' now-button reset-button :hour12="false"
+                                placeholder="Choose a time">
+                            </b-form-timepicker>
+                        </div>
+                        <div v-if="reservationTimes.sunday.length != 0" class="">
                             <label class="modal-body__title-field">Sunday </label>
-                            <section v-if="reservationTimes.sunday.length != 0">
-                                <b-form-timepicker :id='`sunday-${sundayIndex}`'
-                                    v-for="(sunday, sundayIndex) in reservationTimes.sunday" :key="sundayIndex"
-                                    now-button reset-button :hour12="false" :value="sunday[sundayIndex]"
-                                    placeholder="Choose a time">
+                            <b-form-timepicker :id='`sunday-${sundayIndex}`'
+                                v-for="(sunday, sundayIndex) in reservationTimes.sunday" :key="sundayIndex" now-button
+                                reset-button :hour12="false" :value="sunday[sundayIndex]" placeholder="Choose a time">
 
-                                    {{ sunday[sundayIndex] }}
-                                </b-form-timepicker>
-                            </section>
-                            <section v-else>
-                                <b-form-timepicker id='add-sunday' now-button reset-button :hour12="false"
-                                    placeholder="Choose a time">
-                                </b-form-timepicker>
-                            </section>
+                                {{ sunday[sundayIndex] }}
+                            </b-form-timepicker>
                         </div>
-                        <div class="">
+                        <div v-else>
+                            <label class="modal-body__title-field">Sunday </label>
+                            <b-form-timepicker id='add-sunday' now-button reset-button :hour12="false"
+                                placeholder="Choose a time">
+                            </b-form-timepicker>
+                        </div>
+                        <div class="" v-if="reservationTimes.monday.length != 0">
                             <label class="modal-body__title-field">Monday </label>
-                            <section v-if="reservationTimes.monday.length != 0">
-                                <b-form-timepicker :id='`monday-${mondayIndex}`'
-                                    v-for="(monday, mondayIndex) in reservationTimes.monday" :key="mondayIndex"
-                                    now-button reset-button :hour12="false" :value="monday[mondayIndex]"
-                                    placeholder="Choose a time">
+                            <b-form-timepicker :id='`monday-${mondayIndex}`'
+                                v-for="(monday, mondayIndex) in reservationTimes.monday" :key="mondayIndex" now-button
+                                reset-button :hour12="false" :value="monday[mondayIndex]" placeholder="Choose a time">
 
-                                    {{ monday[mondayIndex] }}
-                                </b-form-timepicker>
-                            </section>
-                            <section v-else>
-                                <b-form-timepicker id='add-monday' now-button reset-button :hour12="false"
-                                    placeholder="Choose a time">
-                                </b-form-timepicker>
-                            </section>
+                                {{ monday[mondayIndex] }}
+                            </b-form-timepicker>
                         </div>
-                        <div class="">
+                        <div v-else>
+                            <label class="modal-body__title-field">Monday </label>
+                            <b-form-timepicker id='add-monday' now-button reset-button :hour12="false"
+                                placeholder="Choose a time">
+                            </b-form-timepicker>
+                        </div>
+                        <div class="" v-if="reservationTimes.tuesday.length != 0">
                             <label class="modal-body__title-field">Tuesday </label>
-                            <section v-if="reservationTimes.tuesday.length != 0">
-                                <b-form-timepicker :id='`tuesday-${tuesdayIndex}`'
-                                    v-for="(tuesday, tuesdayIndex) in reservationTimes.tuesday" :key="tuesdayIndex"
-                                    now-button reset-button :hour12="false" :value="tuesday[tuesdayIndex]"
-                                    placeholder="Choose a time">
+                            <b-form-timepicker :id='`tuesday-${tuesdayIndex}`'
+                                v-for="(tuesday, tuesdayIndex) in reservationTimes.tuesday" :key="tuesdayIndex"
+                                now-button reset-button :hour12="false" :value="tuesday[tuesdayIndex]"
+                                placeholder="Choose a time">
 
-                                    {{ tuesday[tuesdayIndex] }}
-                                </b-form-timepicker>
-                            </section>
-                            <section v-else>
-                                <b-form-timepicker id='add-tuesday' now-button reset-button :hour12="false"
-                                    placeholder="Choose a time">
-                                </b-form-timepicker>
-                            </section>
+                                {{ tuesday[tuesdayIndex] }}
+                            </b-form-timepicker>
                         </div>
-                        <div class="">
+                        <div v-else>
+                            <label class="modal-body__title-field">Tuesday </label>
+                            <b-form-timepicker id='add-tuesday' now-button reset-button :hour12="false"
+                                placeholder="Choose a time">
+                            </b-form-timepicker>
+                        </div>
+                        <div class="" v-if="reservationTimes.wednesday.length != 0">
                             <label class="modal-body__title-field">Wednesday </label>
-                            <section v-if="reservationTimes.wednesday.length != 0">
-                                <b-form-timepicker :id='`wednesday-${wednesdayindex}`'
-                                    v-for="(wednesday, wednesdayindex) in reservationTimes.wednesday"
-                                    :key="wednesdayindex" now-button reset-button :hour12="false"
-                                    :value="wednesday[wednesdayindex]" placeholder="Choose a time">
+                            <b-form-timepicker :id='`wednesday-${wednesdayindex}`'
+                                v-for="(wednesday, wednesdayindex) in reservationTimes.wednesday" :key="wednesdayindex"
+                                now-button reset-button :hour12="false" :value="wednesday[wednesdayindex]"
+                                placeholder="Choose a time">
 
-                                    {{ wednesday[wednesdayindex] }}
-                                </b-form-timepicker>
-                            </section>
-                            <section v-else>
-                                <b-form-timepicker id='add-wednesday' now-button reset-button :hour12="false"
-                                    placeholder="Choose a time">
-                                </b-form-timepicker>
-                            </section>
+                                {{ wednesday[wednesdayindex] }}
+                            </b-form-timepicker>
                         </div>
-                        <div class="">
-                            <label>Thursday </label>
-                            <section v-if="reservationTimes.thursday.length != 0">
-                                <b-form-timepicker :id='`thursday-${thursdayIndex}`'
-                                    v-for="(thursday, thursdayIndex) in reservationTimes.thursday" :key="thursdayIndex"
-                                    now-button reset-button :hour12="false" :value="thursday[thursdayIndex]"
-                                    placeholder="Choose a time">
+                        <div v-else>
+                            <label class="modal-body__title-field">Wednesday </label>
+                            <b-form-timepicker id='add-wednesday' now-button reset-button :hour12="false"
+                                placeholder="Choose a time">
+                            </b-form-timepicker>
+                        </div>
+                        <div class="" v-if="reservationTimes.thursday.length != 0">
+                            <label class="modal-body__title-field">Thursday </label>
+                            <b-form-timepicker :id='`thursday-${thursdayIndex}`'
+                                v-for="(thursday, thursdayIndex) in reservationTimes.thursday" :key="thursdayIndex"
+                                now-button reset-button :hour12="false" :value="thursday[thursdayIndex]"
+                                placeholder="Choose a time">
 
-                                    {{ thursday[thursdayIndex] }}
-                                </b-form-timepicker>
-                            </section>
-                            <section v-else>
-                                <b-form-timepicker id='add-thursday' now-button reset-button :hour12="false"
-                                    placeholder="Choose a time">
-                                </b-form-timepicker>
-                            </section>
+                                {{ thursday[thursdayIndex] }}
+                            </b-form-timepicker>
+
                         </div>
-                        <div class="">
+                        <div v-else>
+                            <label class="modal-body__title-field">Thursday </label>
+                            <b-form-timepicker id='add-thursday' now-button reset-button :hour12="false"
+                                placeholder="Choose a time">
+                            </b-form-timepicker>
+                        </div>
+                        <div class="" v-if="reservationTimes.friday.length != 0">
                             <label class="modal-body__title-field">Friday </label>
-                            <section v-if="reservationTimes.friday.length != 0">
-                                <b-form-timepicker v-for="(friday, friIndex) in formData.reservation_times.friday"
-                                    :key="friIndex" now-button reset-button :id='`friday-${friIndex}`' :hour12="false"
-                                    @hidden="EditTimeValues(friday[friIndex], `friday-${friIndex}`)"
-                                    :value="friday[friIndex]" placeholder="Choose a time">
+                            <b-form-timepicker v-for="(friday, friIndex) in reservationTimes.friday" :key="friIndex"
+                                now-button reset-button :id='`friday-${friIndex}`' :hour12="false"
+                                @hidden="EditTimeValues(friday[friIndex], `friday-${friIndex}`)"
+                                :value="friday[friIndex]" placeholder="Choose a time">
 
-                                    {{ friday[friIndex] }}
-                                </b-form-timepicker>
-                            </section>
-                            <section v-else>
-                                <b-form-timepicker id='add-friday-from' v-model="newReservation" now-button reset-button
-                                    :hour12="false" placeholder="Choose a time"
-                                    @hidden="addTimeSelected(newReservation, 'add-friday')">
-                                </b-form-timepicker>
-                                <!-- <b-form-timepicker id='add-friday-to' v-model="newReservation" now-button reset-button
-                                    :hour12="false" placeholder="Choose a time"
-                                    @hidden="timeSelected(newReservation, 'add-friday')">
-                                </b-form-timepicker> -->
-                                <p v-if="showError" class="modal-body__errors">{{ slotsError }}</p>
-                            </section>
+                                {{ friday[friIndex] }}
+                            </b-form-timepicker>
+
+                        </div>
+                        <div v-else>
+                            <label class="modal-body__title-field">Friday </label>
+                            <b-form-timepicker id='add-friday-from' v-model="newReservation" now-button reset-button
+                                :hour12="false" placeholder="Choose a time"
+                                @hidden="addTimeSelected(newReservation, 'add-friday')">
+                            </b-form-timepicker>
+                            <!-- <b-form-timepicker id='add-friday-to' v-model="newReservation" now-button reset-button
+                                :hour12="false" placeholder="Choose a time"
+                                @hidden="timeSelected(newReservation, 'add-friday')">
+                            </b-form-timepicker> -->
+                            <p v-if="showError" class="modal-body__errors">{{ slotsError }}</p>
                         </div>
                     </div>
-
+                    <div v-else>
+                        <div>
+                            <label class="modal-body__title-field">Saturday </label>
+                            <b-form-timepicker id='add-saturday' now-button reset-button :hour12="false"
+                                placeholder="Choose a time">
+                            </b-form-timepicker>
+                        </div>
+                        <div>
+                            <label class="modal-body__title-field">Sunday </label>
+                            <b-form-timepicker id='add-sunday' now-button reset-button :hour12="false"
+                                placeholder="Choose a time">
+                            </b-form-timepicker>
+                        </div>
+                        <div>
+                            <label class="modal-body__title-field">Monday </label>
+                            <b-form-timepicker id='add-monday' now-button reset-button :hour12="false"
+                                placeholder="Choose a time">
+                            </b-form-timepicker>
+                        </div>
+                        <div>
+                            <label class="modal-body__title-field">Tuesday </label>
+                            <b-form-timepicker id='add-tuesday' now-button reset-button :hour12="false"
+                                placeholder="Choose a time">
+                            </b-form-timepicker>
+                        </div>
+                        <div>
+                            <label class="modal-body__title-field">Wednesday </label>
+                            <b-form-timepicker id='add-wednesday' now-button reset-button :hour12="false"
+                                placeholder="Choose a time">
+                            </b-form-timepicker>
+                        </div>
+                        <div>
+                            <label class="modal-body__title-field">Thursday </label>
+                            <b-form-timepicker id='add-thursday' now-button reset-button :hour12="false"
+                                placeholder="Choose a time">
+                            </b-form-timepicker>
+                        </div>
+                        <div>
+                            <label class="modal-body__title-field">Friday </label>
+                            <b-form-timepicker id='add-friday-from' v-model="newReservation" now-button reset-button
+                                :hour12="false" placeholder="Choose a time"
+                                @hidden="addTimeSelected(newReservation, 'add-friday')">
+                            </b-form-timepicker>
+                            <!-- <b-form-timepicker id='add-friday-to' v-model="newReservation" now-button reset-button
+                                :hour12="false" placeholder="Choose a time"
+                                @hidden="timeSelected(newReservation, 'add-friday')">
+                            </b-form-timepicker> -->
+                            <p v-if="showError" class="modal-body__errors">{{ slotsError }}</p>
+                        </div>
+                    </div>
                 </form>
             </b-modal>
         </div>
@@ -227,7 +269,7 @@ export default {
         async handleSubmit() {
             this.v$.$touch();
             if (this.v$.$errors.length === 0) {
-                return await axios
+                await axios
                     .put(
                         `/branches/${this.modalID}`, this.formData,
                         {
@@ -239,8 +281,8 @@ export default {
                     )
                     .then((result) => {
                         console.log(result);
-                        this.$bvModal.hide('modal-prevent-closing')
                     });
+                this.$bvModal.hide('modal-prevent-closing')
             }
         },
         getTables() {
@@ -270,8 +312,11 @@ export default {
                 if (friday.length < 3) {
                     if (this.slotsArray.length < 2) {
                         this.slotsArray.push(value.slice(0, -3))
+                        this.makeToast("success")
+
                     } else {
                         friday.push(this.slotsArray)
+
                         this.slotsArray = []
 
                     }
@@ -301,6 +346,13 @@ export default {
             }
 
         },
+        makeToast(variant = null) {
+            this.$bvToast.toast('Toast body content', {
+                title: `Variant ${variant || 'default'}`,
+                variant: variant,
+                solid: true
+            })
+        }
     },
 };
 </script>
