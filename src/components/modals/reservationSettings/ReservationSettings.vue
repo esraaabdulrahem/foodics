@@ -131,8 +131,8 @@
                             <section v-if="reservationTimes.friday.length != 0">
                                 <b-form-timepicker v-for="(friday, friIndex) in reservationTimes.friday" :key="friIndex"
                                     now-button reset-button :id='`friday-${friIndex}`' :hour12="false"
-                                    @input="EditTimeValues(newVal, `friday-${friIndex}`)"
-                                    :value="friday[friIndex]" placeholder="Choose a time">
+                                    @input="EditTimeValues(newVal, `friday-${friIndex}`)" :value="friday[friIndex]"
+                                    placeholder="Choose a time">
 
                                     {{ friday[friIndex] }}
                                 </b-form-timepicker>
@@ -222,15 +222,11 @@ export default {
     methods: {
         handleSave(bvModalEvent) {
             bvModalEvent.preventDefault()
-            alert("hii")
             this.handleSubmit()
         },
         async handleSubmit() {
             this.v$.$touch();
-            alert("submit")
-            console.log(this.formData, "formdata")
             if (this.v$.$errors.length === 0) {
-
                 return await axios
                     .put(
                         `/branches/${this.modalID}`, this.formData,
@@ -261,7 +257,6 @@ export default {
                                         id: table.id
                                     }
                                     this.tablesNames.push(tableObj)
-                                    // console.log(this.tablesNames, "tablesNames")
                                 }
                             })
                         }
@@ -270,45 +265,35 @@ export default {
             });
         },
         addTimeSelected(value, ID) {
-            alert("timeselected")
+            //add is working but need to be enhanced "native way"
             let friday = this.formData.reservation_times.friday;
             if (ID === 'add-friday' && value != '') {
                 if (friday.length < 3) {
                     if (this.slotsArray.length < 2) {
                         this.slotsArray.push(value.slice(0, -3))
-                        console.log(this.slotsArray, "fryd")
                     } else {
                         friday.push(this.slotsArray)
                         this.slotsArray = []
-                        console.log(friday, "time slots")
 
                     }
                 } else {
                     this.showError = true;
 
                 }
-                console.log(value, "time")
             }
 
         },
         EditTimeValues(newVal, ID) {
-            console.log(newVal, "newVal val")
-
-            console.log(ID, "edit id")
-            let editedValue;
+            //not working 
             if (ID) {
                 let friday = this.formData.reservation_times.friday;
                 if (friday.length < 3) {
                     if (this.slotsArray.length < 2) {
-                        console.log(editedValue, "editted val")
                         this.slotsArray.push(newVal)
                         // this.slotsArray.push(value)
-                        console.log(this.slotsArray, " edit fryd")
                     } else {
                         friday.push(this.slotsArray)
                         this.slotsArray = []
-                        console.log(friday, "edit time slots")
-
                     }
                 } else {
                     this.showError = true;

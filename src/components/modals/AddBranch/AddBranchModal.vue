@@ -34,9 +34,7 @@ export default {
     "b-modal": VBModal,
   },
   methods: {
-    async handleSave(bvModalEvent) {
-      console.log(bvModalEvent);
-      console.log(this.selected, "selected value");
+    async handleSave() {
       return await axios
         .put(
           `/branches/${this.selected.id}`,
@@ -63,7 +61,6 @@ export default {
           accepts_reservations: item.accepts_reservations,
         };
       });
-      console.log(this.branches, "listing");
     },
   },
 };

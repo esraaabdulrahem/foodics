@@ -94,7 +94,6 @@ export default {
           "Content-Type": "application/json"
         }
       }).then(result => {
-        console.log(result, "result")
         if (result.status === 200) {
           this.reservationList = result.data.data;
 
@@ -112,7 +111,6 @@ export default {
           id: item.id
         }
       })
-      console.log(this.branches, "from modal branches")
     },
     addBranchPopupClosed() {
       this.isLoading = true;
@@ -125,13 +123,8 @@ export default {
         item.accepts_reservations = false;
         this.isReservationDisabled = true;
       })
-
-      console.log(this.reservationList,
-        "after false accept reservation"
-      )
     },
     getTablesNumber(sections) {
-      console.log(sections, "sections")
       sections.forEach(section => {
         section.tables.forEach(table => {
           if (table.accepts_reservations) {
@@ -139,7 +132,6 @@ export default {
           }
         })
       })
-      alert("getTablesNumber")
     }
   },
   mounted() {
