@@ -1,0 +1,60 @@
+.generic-modal {
+    .btn-secondary {
+        &.active {
+            // .btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show>.btn-secondary.dropdown-toggle
+            background-color: transparent;
+            border: none;
+            padding: 0;
+            color: #797979;
+            outline: none;
+        }
+    }
+    .generic-modal__show-popup-btn {
+        &.btn-secondary {
+            background-color: transparent;
+            border: none;
+            padding: 0;
+            color: #797979;
+            outline: none;
+            
+        }
+    }
+}
+
+.modal-dialog {
+    .modal-content {
+        .modal-body {
+            .modal-body__title {
+                margin-bottom: 10px;
+            }
+        }
+
+        .modal-footer {
+            .btn.btn-primary {
+                border: none;
+                color: var(--white);
+                background-color: var(--purple);
+                outline: none;
+
+                &:hover {
+                    border: none;
+                    color: var(--white);
+                    background-color: var(--purple);
+                    outline: none;
+                }
+            }
+
+            .btn {
+                &.btn-secondary {
+                    background-color: transparent;
+                    border: none;
+                    padding: 0;
+                    color: #797979;
+                    outline: none;
+                    border: 2px solid #DEE2E6;
+                    padding: 4px 10px;
+                }
+            }
+        }
+    }
+}

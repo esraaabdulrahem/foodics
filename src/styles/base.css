@@ -1,0 +1,13 @@
+:root {
+  --white: #ffffff;
+  --black: #181818;
+  --background-color: #EFF3F6;
+  --purple: #5E28CC;
+}
+
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /**/
+  }
+}

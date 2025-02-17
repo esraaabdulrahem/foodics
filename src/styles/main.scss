@@ -1,0 +1,29 @@
+//variables
+@import "./base.css";
+
+//components
+@import './componentsStyles.scss';
+
+//pages
+@import "../views/reservationList/reservationList";
+
+body {
+    background-color: var(--background-color);
+}
+
+//generic styles (perferred to be in a separated file in huge projects
+
+.generic-purple-btn {
+    border: none;
+    color: var(--white);
+    background-color: var(--purple);
+    outline: none;
+}
+
+.generic-transparent-btn {
+    background-color: transparent;
+    padding: 0;
+    color: #797979;
+    outline: none;
+    border: 2px solid #DEE2E6;
+}

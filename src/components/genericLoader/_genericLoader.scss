@@ -1,0 +1,17 @@
+.generic-loader {
+
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 11111;
+    left: 0;
+    right: 0;
+    background-color: #dcdcdc5e;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    .generic-loader__spinner{
+        position: absolute;
+        max-width: 130px;
+    }
+}

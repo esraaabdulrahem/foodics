@@ -1,0 +1,49 @@
+.modal-dialog {
+    .modal-body {
+        .modal-body__form {
+            max-height: 400px;
+            overflow-y: auto;
+
+            &::-webkit-scrollbar {
+                width: 5px;
+            }
+
+            /* Track */
+            &::-webkit-scrollbar-track {
+                background: #f1f1f1;
+            }
+
+            /* Handle */
+            &::-webkit-scrollbar-thumb {
+                background: #888;
+
+                &:hover {
+                    background: #555;
+                }
+            }
+
+            .modal-body__form__disclamer {
+                font-size: 12px;
+                color: green;
+            }
+
+            .v-select {
+                .vs__dropdown-menu {
+                    li {
+
+                        z-index: 1000;
+                    }
+                }
+            }
+
+            .modal-body__title-field {
+                margin: 10px 0;
+            }
+
+            .modal-body__errors {
+                color: red;
+            }
+
+        }
+    }
+}
