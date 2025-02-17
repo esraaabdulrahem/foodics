@@ -129,9 +129,9 @@
                         <div class="">
                             <label class="modal-body__title-field">Friday </label>
                             <section v-if="reservationTimes.friday.length != 0">
-                                <b-form-timepicker v-for="(friday, friIndex) in reservationTimes.friday" :key="friIndex"
-                                    now-button reset-button :id='`friday-${friIndex}`' :hour12="false"
-                                    @input="EditTimeValues(newVal, `friday-${friIndex}`)" :value="friday[friIndex]"
+                                <b-form-timepicker v-for="(friday, friIndex) in formData.reservation_times.friday"
+                                    :key="friIndex" now-button reset-button :id='`friday-${friIndex}`' :hour12="false"
+                                    @hidden="EditTimeValues(friday[friIndex], `friday-${friIndex}`)" :value="friday[friIndex]"
                                     placeholder="Choose a time">
 
                                     {{ friday[friIndex] }}
@@ -184,7 +184,7 @@ export default {
                     tuesday: [],
                     wednesday: [],
                     thursday: [],
-                    friday: []
+                    friday: this.reservationTimes.friday || []
                 }
             }
         };
@@ -240,7 +240,6 @@ export default {
                     .then((result) => {
                         console.log(result);
                         this.$bvModal.hide('modal-prevent-closing')
-                        this.$emit("popupClosed", this.selectedTables = '')
                     });
             }
         },
