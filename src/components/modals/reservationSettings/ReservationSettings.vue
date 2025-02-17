@@ -306,19 +306,17 @@ export default {
             });
         },
         addTimeSelected(value, ID) {
-            //add is working but need to be enhanced "native way"
+            //add is working but need to be enhanced "native way" works only on fridays
+
             let friday = this.formData.reservation_times.friday;
             if (ID === 'add-friday' && value != '') {
                 if (friday.length < 3) {
                     if (this.slotsArray.length < 2) {
                         this.slotsArray.push(value.slice(0, -3))
                         this.makeToast("success")
-
                     } else {
                         friday.push(this.slotsArray)
-
                         this.slotsArray = []
-
                     }
                 } else {
                     this.showError = true;
