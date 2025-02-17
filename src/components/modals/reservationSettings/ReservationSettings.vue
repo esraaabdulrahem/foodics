@@ -131,8 +131,8 @@
                             <section v-if="reservationTimes.friday.length != 0">
                                 <b-form-timepicker v-for="(friday, friIndex) in formData.reservation_times.friday"
                                     :key="friIndex" now-button reset-button :id='`friday-${friIndex}`' :hour12="false"
-                                    @hidden="EditTimeValues(friday[friIndex], `friday-${friIndex}`)" :value="friday[friIndex]"
-                                    placeholder="Choose a time">
+                                    @hidden="EditTimeValues(friday[friIndex], `friday-${friIndex}`)"
+                                    :value="friday[friIndex]" placeholder="Choose a time">
 
                                     {{ friday[friIndex] }}
                                 </b-form-timepicker>
@@ -184,7 +184,7 @@ export default {
                     tuesday: [],
                     wednesday: [],
                     thursday: [],
-                    friday: this.reservationTimes.friday || []
+                    friday: []
                 }
             }
         };
@@ -300,7 +300,7 @@ export default {
                 }
             }
 
-        }
+        },
     },
 };
 </script>
