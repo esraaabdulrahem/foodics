@@ -67,7 +67,7 @@
                 "
               >
                 {{ branch.accepts_reservations }}
-                <!-- {{ getTablesNumber(branch.sections)  }} -->
+                {{ getTablesNumber(branch.sections) }}
               </td>
               <td
                 v-if="
@@ -148,7 +148,7 @@ export default {
       this.isReservationDisabled = false;
       this.getBranchesListing();
     },
-    branchDataUpdated(){
+    branchDataUpdated() {
       this.isLoading = true;
       this.getBranchesListing();
     },
@@ -160,6 +160,11 @@ export default {
       });
     },
     getTablesNumber(sections) {
+      // sections.reduce((count, section) => {
+      //   return (
+      //     count + section.tables.filter((table) => table.accepts_reservations).length
+      //   );
+      // }, 0);
       sections.forEach((section) => {
         section.tables.forEach((table) => {
           if (table.accepts_reservations) {
@@ -167,7 +172,7 @@ export default {
           }
         });
       });
-      return this.tableCount
+      return this.tableCount;
     },
   },
   mounted() {

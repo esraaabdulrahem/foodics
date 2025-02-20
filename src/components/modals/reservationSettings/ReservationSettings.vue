@@ -107,8 +107,7 @@
               </section>
             </div>
           </div>
-          <!-- <div v-else>
-            don't remove 
+          <div v-else>
             <section v-for="(reservation, day) in newReservation" :key="day">
               <label :for="day"> {{ day.charAt(0).toUpperCase() + day.slice(1) }}</label>
               <label class="modal-body__title-field"> from: </label>
@@ -120,7 +119,9 @@
                 reset-button
                 :hour12="false"
                 placeholder="Choose a time"
-                @hidden="addEditTimeSlots(reservation.from, `add-${day}-from`, day, false)"
+                @hidden="
+                  addEditTimeSlots(reservation.from, `add-${day}-from`, day, false)
+                "
               >
               </b-form-timepicker>
 
@@ -140,7 +141,7 @@
                 {{ slotsError }}
               </p>
             </section>
-          </div> -->
+          </div>
         </form>
       </b-modal>
     </div>
@@ -300,7 +301,6 @@ export default {
               this.newReservation[dayName].to = "";
 
               if (editFlag) {
-
                 let newUpdatedArray = this.compareAndUpdateArrays(times, day);
                 day = newUpdatedArray;
                 this.formData.reservation_times[dayName] = newUpdatedArray;
