@@ -48,7 +48,6 @@ export default {
         )
         .then((result) => {
           console.log(result);
-
           this.$emit("addBranchPopupClosed", this.selected = '')
         });
     },
