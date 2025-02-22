@@ -4,7 +4,7 @@
       <b-button
         v-b-modal="`modal-${modalID}`"
         class="generic-modal__show-popup-btn"
-        @click="getTables"
+        @click="getTables(modalID)"
       >
         {{ branchName }}
       </b-button>
@@ -18,10 +18,6 @@
         <GenericLoader v-if="isLoading" />
 
         <form class="modal-body__form" @submit.stop.prevent="handleSubmit">
-          <span class="modal-body__form__disclamer">
-            disclaimer: please notice that the reservation time should be greater than the
-            reservation duration
-          </span>
           <div class="modal-body__input-field">
             <p class="modal-body__title-field">Reservation Duration (minutes)*</p>
             <b-form-input
@@ -34,7 +30,12 @@
           </div>
           <p class="modal-body__title-field">Tables</p>
           <v-select multiple v-model="selectedTables" :options="tablesNames" />
-          <div v-if="reservationTimes != null || reservationTimes != []">
+          <div
+            v-if="
+              (reservationTimes != null || reservationTimes != []) &&
+              tablesNames.length != 0
+            "
+          >
             <div v-for="(times, day) in reservationTimes" :key="day">
               <label class="modal-body__title-field"
                 >{{ day.charAt(0).toUpperCase() + day.slice(1) }}
@@ -107,7 +108,7 @@
               </section>
             </div>
           </div>
-          <div v-else>
+          <div v-if="reservationTimes === null && tablesNames.length != 0">
             <section v-for="(reservation, day) in newReservation" :key="day">
               <label :for="day"> {{ day.charAt(0).toUpperCase() + day.slice(1) }}</label>
               <label class="modal-body__title-field"> from: </label>
@@ -177,7 +178,6 @@ export default {
       editReservationTo: "",
       slotsError: "you can not add more than 3 time slots per day",
       slotsArray: [],
-      newVal: "",
       formData: {
         reservation_duration: this.reservationDuration,
         reservation_times: {
@@ -234,24 +234,46 @@ export default {
         this.updateBranchSettings(this.modalID, this.formData);
       }
     },
-    getTables() {
+    getTables(ID) {
       //need to be enhanced
-      this.reservationList.forEach((section) => {
-        if (section.sections.length != 0) {
-          section.sections.forEach((sectionName) => {
+      // this.reservationList.forEach((section) => {
+      //   if (section.sections.length != 0) {
+      //     section.sections.forEach((sectionName) => {
+      //       if (sectionName.tables.length != 0) {
+      //         sectionName.tables.forEach((table) => {
+      //           if (table.name != "") {
+      //             let tableObj = {
+      //               label: `${sectionName.name} - ${table.name}`,
+      //               id: table.id,
+      //             };
+      //             this.tablesNames.push(tableObj);
+      //           }
+      //         });
+      //       }
+      //     });
+      //   }
+      // });
+
+      //there are a lot of cases why we can open the popup as there is no tables to be reserved
+      //and why we can render the record when only it accept the reservation to be true and there is no available
+      // tables i choose to not render the reservation time slots of days when there is no avaliable tables unless we
+      //can add tables or rather than that I will render tables for all reords
+      // I also want to not render the record in table unless it has sections !=[]
+      this.reservationList.filter((list) => {
+        if (list.id === ID && list.sections.length != 0)
+          list.sections.forEach((sectionName) => {
             if (sectionName.tables.length != 0) {
               sectionName.tables.forEach((table) => {
                 if (table.name != "") {
                   let tableObj = {
                     label: `${sectionName.name} - ${table.name}`,
-                    id: table.id,
+                    id: `${sectionName.id}_${table.id}`,
                   };
                   this.tablesNames.push(tableObj);
                 }
               });
             }
           });
-        }
       });
     },
     async updateBranchSettings(ID, data) {
@@ -296,10 +318,15 @@ export default {
             this.slotsArray.push(value.slice(0, -3));
             if (this.slotsArray.length === 2) {
               day.push(this.slotsArray);
+              times.push(this.slotsArray);
+              this.makeToast(
+                "success",
+                "time added",
+                `first time slot is reserved from ${this.slotsArray[0]} to ${this.slotsArray[1]} click save to keep reservations`
+              );
               this.slotsArray = [];
               this.newReservation[dayName].from = "";
               this.newReservation[dayName].to = "";
-
               if (editFlag) {
                 let newUpdatedArray = this.compareAndUpdateArrays(times, day);
                 day = newUpdatedArray;
@@ -330,15 +357,14 @@ export default {
       }
     },
     compareAndUpdateArrays(array1, array2) {
-      let NewUnrepeatedVals = [...array2]; // Start with existing slots in array2
+      let NewUnrepeatedVals = [...array2];
 
-      // Add slots from array1 that are not already in array2
       array1.forEach((slot1) => {
         const slotExistsInArray2 = array2.some((slot2) =>
           this.areSlotsEqual(slot1, slot2)
         );
         if (!slotExistsInArray2) {
-          NewUnrepeatedVals.push(slot1); // Add to the new array if not found in array2
+          NewUnrepeatedVals.push(slot1);
         }
       });
 

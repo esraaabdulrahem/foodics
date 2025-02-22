@@ -28,8 +28,13 @@
             </tr>
           </thead>
           <GenericLoader v-if="isLoading" />
-          <tbody>
-            <tr v-for="(branch, index) in reservationList" :key="index">
+          <tbody v-for="(branch, index) in reservationList" :key="index">
+            <tr
+              v-if="
+                branch.accepts_reservations &&
+                (branch.reservation_times != [] || branch.reservation_times != null)
+              "
+            >
               <td
                 v-if="
                   branch.accepts_reservations &&
@@ -67,7 +72,7 @@
                 "
               >
                 {{ branch.accepts_reservations }}
-                {{ getTablesNumber(branch.sections) }}
+                <!-- {{ getTablesNumber(branch.sections) }} -->
               </td>
               <td
                 v-if="
