@@ -259,12 +259,13 @@ export default {
       // tables i choose to not render the reservation time slots of days when there is no avaliable tables unless we
       //can add tables or rather than that I will render tables for all reords
       // I also want to not render the record in table unless it has sections !=[]
+      // why the tables are added to popup and we don't send it to the api when we sumbit only times of reservation
       this.reservationList.filter((list) => {
         if (list.id === ID && list.sections.length != 0)
           list.sections.forEach((sectionName) => {
             if (sectionName.tables.length != 0) {
               sectionName.tables.forEach((table) => {
-                if (table.name != "") {
+                if (table.name != "" && table.accepts_reservations) {
                   let tableObj = {
                     label: `${sectionName.name} - ${table.name}`,
                     id: `${sectionName.id}_${table.id}`,
