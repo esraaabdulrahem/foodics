@@ -17,7 +17,7 @@
       >
         <GenericLoader v-if="isLoading" />
 
-        <form class="modal-body__form" @submit.stop.prevent="handleSubmit">
+        <form class="modal-body__form" @submit.prevent="handleSubmit">
           <div class="modal-body__input-field">
             <p class="modal-body__title-field">Reservation Duration (minutes)*</p>
             <b-form-input
@@ -61,9 +61,9 @@
                     </strong>
                   </span>
                   <button
+                    type="button"
                     class="generic-transparent-btn"
                     @click="cancelReservation(times, timeRange, day)"
-                    type="button"
                   >
                     Cancel Reservation
                   </button>
