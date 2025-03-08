@@ -17,6 +17,7 @@
           :reservationList="reservationList"
           @addBranchPopupClosed="addBranchPopupClosed($event)"
         />
+
         <NotFound v-if="isReservationDisabled || reservationList.length === 0" />
         <table class="table" v-else>
           <thead>
