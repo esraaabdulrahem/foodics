@@ -60,13 +60,14 @@ export default {
         });
     },
     getBarnches() {
+      // label: ` ${item.name}  Accepts Reservations: ${
+      //           item.accepts_reservations ? "yes" : "no"
+      //         } `,
       this.branches = this.reservationList
         .map((item) => {
           if (!item.accepts_reservations) {
             return {
-              label: ` ${item.name}  Accepts Reservations: ${
-                item.accepts_reservations ? "yes" : "no"
-              } `,
+              label: item.name,
               id: item.id,
               accepts_reservations: item.accepts_reservations,
             };
