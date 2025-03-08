@@ -27,6 +27,13 @@
                 color: green;
             }
 
+            .modal-body__form__apply-btn {
+                color: var(--purple);
+                background-color: transparent;
+                border: none;
+                outline: none;
+            }
+
             .v-select {
                 .vs__dropdown-menu {
                     li {

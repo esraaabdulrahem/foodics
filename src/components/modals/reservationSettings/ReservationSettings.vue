@@ -37,9 +37,18 @@
             "
           >
             <div v-for="(times, day) in reservationTimes" :key="day">
-              <label class="modal-body__title-field"
-                >{{ day.charAt(0).toUpperCase() + day.slice(1) }}
-              </label>
+              <div class="d-flex justify-content-between">
+                <label class="modal-body__title-field"
+                  >{{ day.charAt(0).toUpperCase() + day.slice(1) }}
+                </label>
+                <button
+                  v-if="day === 'saturday'"
+                  class="modal-body__form__apply-btn"
+                  @click="applyToAllDays"
+                >
+                  Apply on all days
+                </button>
+              </div>
               <div v-if="times.length > 0">
                 <div
                   class="d-flex justify-content-between"
@@ -391,6 +400,13 @@ export default {
       this.formData.reservation_times[day] = reservedSpots;
       this.isLoading = true;
       this.updateBranchSettings(this.modalID, this.formData);
+    },
+    applyToAllDays() {
+      const saturdaySlots = this.reservationTimes.saturday;
+
+      Object.keys(this.reservationTimes).forEach((day) => {
+        this.formData.reservation_times[day] = [...saturdaySlots];
+      });
     },
     makeToast(variant = null, title, msg) {
       this.$bvToast.toast(msg, {
